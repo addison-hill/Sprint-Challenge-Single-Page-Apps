@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import CharacterCard from "./CharacterCard";
+import SearchForm from "./SearchForm";
 
 export default function CharacterList() {
   // TODO: Add useState to track data from useEffect
@@ -18,9 +19,11 @@ export default function CharacterList() {
     .catch(error => {
       console.log("error", error);
     });
-  }, []);
+  }, [setCharacters]);
 
   return (
+    <div>
+    <SearchForm characters={characters} />
     <section className="character-list">
       {characters.map(char => {
         return (
@@ -28,11 +31,12 @@ export default function CharacterList() {
             key={char.id}
             name={char.name}
             status={char.status}
-            location={char.location}
+            location={char.location.name}
             imgURL={char.image}
           />
         );
       })}
     </section>
+    </div>
   );
 }
