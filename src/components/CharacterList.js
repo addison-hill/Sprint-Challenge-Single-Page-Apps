@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import CharacterCard from "./CharacterCard";
-import SearchForm from "./SearchForm";
+import SearchForm from "./SearchForm.js";
 
 export default function CharacterList() {
   // TODO: Add useState to track data from useEffect
@@ -13,8 +13,9 @@ export default function CharacterList() {
     Axios
     .get(`https://rickandmortyapi.com/api/character`)
     .then(response => {
-      console.log("chars", response.data.results);
-      setCharacters(response.data.results);
+      const chars = response.data.results;
+      console.log("chars", chars);
+      setCharacters(chars);
     })
     .catch(error => {
       console.log("error", error);
@@ -32,7 +33,6 @@ export default function CharacterList() {
             name={char.name}
             status={char.status}
             location={char.location.name}
-            imgURL={char.image}
           />
         );
       })}

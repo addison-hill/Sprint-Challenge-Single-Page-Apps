@@ -3,6 +3,7 @@ import Header from "./components/Header.js";
 import CharacterList from "./components/CharacterList";
 import WelcomePage from "./components/WelcomePage";
 import { Route, Link } from "react-router-dom";
+import './App.css';
 // import SearchForm from "./components/SearchForm";
 
 export default function App() {
@@ -15,7 +16,6 @@ export default function App() {
         <Link to="/characters">Characters</Link>
       </div>
       </nav>
-
       <Route exact path="/" component={WelcomePage} />
       <Route exact path="/characters" component={CharacterList} />
     </main>

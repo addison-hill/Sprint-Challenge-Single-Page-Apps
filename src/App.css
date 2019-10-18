@@ -1,3 +1,8 @@
 .char-card {
-    border: 2px lightskyblue;
+    border: 2px black;
 }
+
+.character-list {
+    border: 1px gray;
+    background-color: skyblue;
+  }

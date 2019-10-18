@@ -1,33 +1,40 @@
-import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
+import React, { useState } from "react";
 
 
 const SearchForm = props => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState("");
+  console.log("props", props);
+
   const handleChange = event => {
     setSearchTerm(event.target.value);
   }
 
-  useEffect(() => {
-    const results = props.filter(char =>
-      char.toLowerCase().includes(searchTerm));
-      setSearchResults(results)
-  }, [searchTerm]);
+  const handleSubmit = event => {
+    event.preventDefault();
+    const results = props.name.filter(char => 
+      char.name.toLowerCase().includes(searchTerm.toLowerCase()))
+      
+  }
 
   return (
     <section className="search-form">
+      <form type="submit">
       <input 
         type="text"
+        name="search"
         placeholder="search"
         value={searchTerm}
-        onChange={handleChange} />
-      <ul>
-        {searchResults.map(item => (
-          <li>{item}</li>
-        ))}
-      </ul>
+        onChange={handleChange}
+      /><br />
+      <button onSubmit={handleSubmit}>Search</button>
+      </form>
     </section>
   );
 }
 export default SearchForm
+
+// How do you submit a form?
+
+// What is it your trying to filter thru and where do you need to filter?
+
+// Console.log props
