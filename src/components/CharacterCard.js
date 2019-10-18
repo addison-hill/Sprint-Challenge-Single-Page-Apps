@@ -1,5 +1,16 @@
 import React from "react";
+import { Card, CardImg, CardTitle, CardSubtitle } from "reactstrap";
 
-export default function CharacterCard() {
-  return <span>todo: character</span>;
+const CharacterCard = props => {
+  return (
+    
+      <div className="card" key={props.id}>
+        <h1>Name: {props.name}</h1>
+      </div>
+  
+    
+  )
 }
+
+export default CharacterCard
+
