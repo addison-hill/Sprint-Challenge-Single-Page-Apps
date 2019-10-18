@@ -1,24 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 
 const SearchForm = props => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [ searchResults, setSearchResults ] = useState([]);
   console.log("props", props);
+  const {names} = props.characters.name;
+
+  useEffect(() => {
+    const results = names.filter(character =>
+      character.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setSearchResults(results);
+  }, [searchTerm]);
 
   const handleChange = event => {
     setSearchTerm(event.target.value);
   }
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    const results = props.name.filter(char => 
-      char.name.toLowerCase().includes(searchTerm.toLowerCase()))
-      
-  }
-
   return (
     <section className="search-form">
-      <form type="submit">
+      <form>
       <input 
         type="text"
         name="search"
@@ -26,8 +28,14 @@ const SearchForm = props => {
         value={searchTerm}
         onChange={handleChange}
       /><br />
-      <button onSubmit={handleSubmit}>Search</button>
       </form>
+      <div className="character-list">
+        <ul>
+          {searchResults.map(character => (
+            <li key={character}>{character}</li>
+          ))}
+        </ul>
+      </div>
     </section>
   );
 }
@@ -38,3 +46,10 @@ export default SearchForm
 // What is it your trying to filter thru and where do you need to filter?
 
 // Console.log props
+
+// const handleSubmit = event => {
+//   event.preventDefault();
+//   const results = props.name.filter(char => 
+//     char.name.toLowerCase().includes(searchTerm.toLowerCase()))
+    
+// }
