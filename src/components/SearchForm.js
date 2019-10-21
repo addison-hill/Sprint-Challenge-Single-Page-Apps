@@ -1,22 +1,31 @@
 import React, { useState, useEffect } from "react";
 
 
+
 const SearchForm = props => {
   const [searchTerm, setSearchTerm] = useState("");
   const [ searchResults, setSearchResults ] = useState([]);
   console.log("props", props);
-  const {names} = props.characters.name;
 
-  useEffect(() => {
-    const results = names.filter(character =>
-      character.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      setSearchResults(results);
-  }, [searchTerm]);
+
+const handleSearch = () => {
+  const searchArr = props.characters.filter(char => char.name.toLowerCase()
+  .includes(searchTerm.toLowerCase()))
+  props.setSearchResults(searchArr)
+}
+
+  
+
+   useEffect(() => {
+     handleSearch()
+     
+   }, [searchTerm]);
 
   const handleChange = event => {
     setSearchTerm(event.target.value);
   }
+
+  
 
   return (
     <section className="search-form">
@@ -30,11 +39,11 @@ const SearchForm = props => {
       /><br />
       </form>
       <div className="character-list">
-        <ul>
-          {searchResults.map(character => (
-            <li key={character}>{character}</li>
+        {/* <ul>
+          { searchResults && searchResults.map(character => (
+            <li key={character.id}>{character.name}</li>
           ))}
-        </ul>
+        </ul> */}
       </div>
     </section>
   );
