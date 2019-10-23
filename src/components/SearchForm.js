@@ -1,10 +1,64 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-export default function SearchForm() {
- 
+
+
+const SearchForm = props => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [ searchResults, setSearchResults ] = useState([]);
+  console.log("props", props);
+
+
+const handleSearch = () => {
+  const searchArr = props.characters.filter(char => char.name.toLowerCase()
+  .includes(searchTerm.toLowerCase()))
+  props.setSearchResults(searchArr)
+}
+
+  
+
+   useEffect(() => {
+     handleSearch()
+     
+   }, [searchTerm]);
+
+  const handleChange = event => {
+    setSearchTerm(event.target.value);
+  }
+
+  
+
   return (
     <section className="search-form">
-     // Add a search form here
+      <form>
+      <input 
+        type="text"
+        name="search"
+        placeholder="search"
+        value={searchTerm}
+        onChange={handleChange}
+      /><br />
+      </form>
+      <div className="character-list">
+        {/* <ul>
+          { searchResults && searchResults.map(character => (
+            <li key={character.id}>{character.name}</li>
+          ))}
+        </ul> */}
+      </div>
     </section>
   );
 }
+export default SearchForm
+
+// How do you submit a form?
+
+// What is it your trying to filter thru and where do you need to filter?
+
+// Console.log props
+
+// const handleSubmit = event => {
+//   event.preventDefault();
+//   const results = props.name.filter(char => 
+//     char.name.toLowerCase().includes(searchTerm.toLowerCase()))
+    
+// }
